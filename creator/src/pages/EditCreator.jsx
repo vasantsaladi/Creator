@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../client";
 import { useParams, useNavigate } from "react-router-dom";
+import { Container, TextField, Button, Typography, Box } from "@mui/material";
 
 const EditCreator = () => {
   const [name, setName] = useState("");
@@ -52,73 +53,57 @@ const EditCreator = () => {
   };
 
   return (
-    <div className="container" style={styles.container}>
-      <h1>Edit Creator</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          URL:
-          <input
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Image URL:
-          <input
-            type="url"
-            value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-          />
-        </label>
-        <div style={styles.buttonGroup}>
-          <button type="submit" className="contrast">
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Edit Creator
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <TextField
+          label="Name"
+          fullWidth
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <TextField
+          label="URL"
+          fullWidth
+          margin="normal"
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          required
+        />
+        <TextField
+          label="Description"
+          fullWidth
+          margin="normal"
+          multiline
+          rows={4}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <TextField
+          label="Image URL"
+          fullWidth
+          margin="normal"
+          type="url"
+          value={imageURL}
+          onChange={(e) => setImageURL(e.target.value)}
+        />
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+          <Button type="submit" variant="contained" color="primary">
             Save
-          </button>
-          <button type="button" onClick={handleDelete} className="secondary">
+          </Button>
+          <Button variant="outlined" color="error" onClick={handleDelete}>
             Delete
-          </button>
-        </div>
-      </form>
-    </div>
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "600px",
-    margin: "0 auto",
-    padding: "20px",
-    textAlign: "center",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  buttonGroup: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "20px",
-  },
 };
 
 export default EditCreator;

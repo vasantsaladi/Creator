@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../client";
 import CreatorCard from "../components/CreatorCard";
+import { Container, Grid, Typography } from "@mui/material";
 
 const ShowCreators = () => {
   const [creators, setCreators] = useState([]);
@@ -18,24 +19,20 @@ const ShowCreators = () => {
   }, []);
 
   return (
-    <div style={styles.gridContainer}>
-      {creators.length > 0 ? (
-        creators.map((creator) => (
-          <CreatorCard key={creator.id} creator={creator} />
-        ))
-      ) : (
-        <p>No creators found.</p>
-      )}
-    </div>
+    <Container maxWidth="lg">
+      <Grid container spacing={3}>
+        {creators.length > 0 ? (
+          creators.map((creator) => (
+            <Grid item xs={12} sm={6} md={4} key={creator.id}>
+              <CreatorCard creator={creator} />
+            </Grid>
+          ))
+        ) : (
+          <Typography variant="body1">No creators found.</Typography>
+        )}
+      </Grid>
+    </Container>
   );
-};
-
-const styles = {
-  gridContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", // Two cards per row
-    gap: "20px", // Space between cards
-  },
 };
 
 export default ShowCreators;

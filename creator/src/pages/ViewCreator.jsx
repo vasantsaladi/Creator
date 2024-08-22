@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../client";
 import { useParams, Link } from "react-router-dom";
 import CreatorCard from "../components/CreatorCard";
+import { Container, Button, CircularProgress, Typography } from "@mui/material";
 
 const ViewCreator = () => {
   const [creator, setCreator] = useState(null);
@@ -34,20 +35,27 @@ const ViewCreator = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading creator details...</div>;
+    return <CircularProgress />;
   }
 
   if (!creator) {
-    return <div>Creator not found.</div>;
+    return <Typography variant="body1">Creator not found.</Typography>;
   }
 
   return (
-    <div className="container">
+    <Container maxWidth="sm">
       <CreatorCard creator={creator} />
-      <Link to={`/edit-creator/${creator.id}`} className="button contrast">
+      <Button
+        component={Link}
+        to={`/edit-creator/${creator.id}`}
+        variant="contained"
+        color="primary"
+        fullWidth
+        sx={{ mt: 3 }}
+      >
         Edit
-      </Link>
-    </div>
+      </Button>
+    </Container>
   );
 };
 

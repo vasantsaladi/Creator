@@ -4,37 +4,29 @@ import ShowCreators from "./pages/ShowCreators";
 import ViewCreator from "./pages/ViewCreator";
 import AddCreator from "./pages/AddCreator";
 import EditCreator from "./pages/EditCreator";
-import "@picocss/pico"; // Ensure Pico.css is included
+import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 
 function App() {
   return (
     <Router>
-      <header className="container-fluid">
-        <div className="container grid">
-          <h1 style={{ marginRight: "center" }}>Creatorverse</h1>
-
-          <Link to="/add-creator" style={{ marginLeft: "auto" }}>
-            <button
-              className="secondary"
-              style={{
-                backgroundColor: "#f8f9fa", // Light background
-                color: "#333", // Darker text color
-                border: "1px solid #ddd", // Light border
-              }}
-            >
-              Add Creator
-            </button>
-          </Link>
-        </div>
-      </header>
-      <main className="container">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Creatorverse
+          </Typography>
+          <Button component={Link} to="/add-creator" color="inherit">
+            Add Creator
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Container sx={{ mt: 4 }}>
         <Routes>
           <Route path="/" element={<ShowCreators />} />
           <Route path="/creators/:id" element={<ViewCreator />} />
           <Route path="/add-creator" element={<AddCreator />} />
           <Route path="/edit-creator/:id" element={<EditCreator />} />
         </Routes>
-      </main>
+      </Container>
     </Router>
   );
 }

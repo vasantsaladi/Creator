@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { supabase } from "../client";
 import { useNavigate } from "react-router-dom";
+import { Container, TextField, Button, Typography, Box } from "@mui/material";
 
 const AddCreator = () => {
   const [name, setName] = useState("");
@@ -22,69 +23,58 @@ const AddCreator = () => {
   };
 
   return (
-    <div className="container" style={styles.container}>
-      <h1 style={styles.title}>Add a Creator</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          URL:
-          <input
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Image URL:
-          <input
-            type="url"
-            value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-          />
-        </label>
-        <button type="submit" className="contrast" style={styles.button}>
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Add a Creator
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <TextField
+          label="Name"
+          fullWidth
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <TextField
+          label="URL"
+          fullWidth
+          margin="normal"
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          required
+        />
+        <TextField
+          label="Description"
+          fullWidth
+          margin="normal"
+          multiline
+          rows={4}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <TextField
+          label="Image URL"
+          fullWidth
+          margin="normal"
+          type="url"
+          value={imageURL}
+          onChange={(e) => setImageURL(e.target.value)}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
           Add Creator
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "400px",
-    margin: "0 auto",
-    padding: "20px",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: "20px",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  button: {
-    width: "100%",
-  },
 };
 
 export default AddCreator;
